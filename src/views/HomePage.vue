@@ -1,8 +1,14 @@
 <template>
   <ion-page>
-    <ion-header>header</ion-header>
+    <ion-header :translucent="true">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button color="primary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Home</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
-      <div><p>Home Page</p></div>
       <ion-grid>
         <ion-row>
           <ion-col class="ion-text-center">
@@ -97,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader } from "@ionic/vue";
+import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle } from "@ionic/vue";
 
 import { readerOutline } from "ionicons/icons";
 import { register } from "swiper/element/bundle";
