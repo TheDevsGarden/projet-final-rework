@@ -55,6 +55,8 @@ const activeSelection = ref<string | null>(null);
 const setActiveSelection = (name: string) => {
   activeSelection.value = name;
 };
+
+//the next smallest thing I can do is onclick take me to the recipe list page with this param
 </script>
 
 <style scoped></style>
