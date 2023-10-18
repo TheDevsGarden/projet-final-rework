@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet, IonSplitPane } from "@ionic/vue";
 import { ref } from "vue";
-import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, heartOutline, heartSharp, home, listCircleOutline, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from "ionicons/icons";
+import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, fingerPrintOutline, heartOutline, heartSharp, home, listCircleOutline, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from "ionicons/icons";
 
 const selectedIndex = ref(0);
 const appPages = [
@@ -35,21 +35,21 @@ const appPages = [
   },
   {
     title: "CATÉGORIES",
-    url: "/folder/Catégories",
+    url: "/pages/categories",
     iosIcon: listCircleOutline,
     mdIcon: listCircleOutline,
   },
   {
     title: "COLLECTION",
-    url: "/folder/Favorites",
+    url: "/pages/favorites",
     iosIcon: heartOutline,
     mdIcon: heartSharp,
   },
   {
     title: "COMPTE",
-    url: "/folder/Archived",
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
+    url: "/pages/account",
+    iosIcon: fingerPrintOutline,
+    mdIcon: fingerPrintOutline,
   },
 ];
 
