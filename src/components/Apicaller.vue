@@ -6,7 +6,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <div>Array: [{{ categoryArray }}]</div>
+      <div>Array:</div>
     </ion-content>
   </ion-page>
 </template>
@@ -15,7 +15,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/vue";
 import { Ref, ref } from "vue";
 
-const categoryArray = ref<String[]>;
+// const categoryArray = ref<String[]>;
 
 const fetchCategories = async () => {
   const response = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
@@ -32,10 +32,12 @@ const fetchCategories = async () => {
   return categoryMaps;
 };
 
-fetchCategories().then((categoryMaps) => {
-  for (const item in categoryMaps) {
-  }
-});
+// fetchCategories().then((categoryMaps) => {
+//   for (const item in categoryMaps) {
+//   }
+// });
+
+fetchCategories();
 </script>
 
 <style scoped></style>

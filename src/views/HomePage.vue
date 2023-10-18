@@ -49,7 +49,17 @@
         <ion-card-content><ion-button color="dark">Go Premium</ion-button></ion-card-content>
       </ion-card>
 
+      <!-- professor has a requirement for meal of the day -->
+      <ion-card class="ion-text-center">
+        <ion-card-header>
+          <ion-card-title>Recette DU JOUR</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content><ion-button color="dark">Voir</ion-button></ion-card-content>
+      </ion-card>
+
       <ion-label><h2>I WOULD LIKE TO COOK</h2></ion-label>
+      <!-- The below could be re-implemented in vue-virtual-scroller  -->
       <swiper-container
         class="wider-slide"
         :slides-per-view="3"

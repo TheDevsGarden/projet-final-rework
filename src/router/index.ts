@@ -17,10 +17,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "categoryPage",
     component: Apicaller,
   },
-  {
-    path: "/folder/:id",
-    component: () => import("../views/FolderPage.vue"),
-  },
 ];
 
 const router = createRouter({
