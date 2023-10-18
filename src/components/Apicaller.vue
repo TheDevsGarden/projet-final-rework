@@ -7,10 +7,11 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item v-for="category in categoryMaps" :key="category.id">
+        <ion-item v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
           <ion-label>{{ category.name }}</ion-label>
         </ion-item>
       </ion-list>
+      <div v-if="activeSelection">Active selection: {{ activeSelection }}</div>
     </ion-content>
   </ion-page>
 </template>
@@ -19,50 +20,41 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel } from "@ionic/vue";
 import { Ref, ref, computed } from "vue";
 
-interface Category {
+class Category {
   id: string;
   name: string;
   description: string;
   thumbnail: string;
+
+  constructor(id: string, name: string, description: string, thumbnail: string) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.thumbnail = thumbnail;
+  }
 }
 
 const fetchCategories = async () => {
   const response = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
   const data = await response.json();
   console.log(data);
-  return data;
-};
-
-const fetchCategoriesAsMap = async () => {
-  const response = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
-  const data = await response.json();
-  console.log(data);
-  const categoryMaps = data.categories.map((category: { idCategory: string; strCategory: string; strCategoryDescription: string; strCategoryThumb: string }) => {
-    return {
-      id: category.idCategory,
-      name: category.strCategory,
-      description: category.strCategoryDescription,
-      thumbnail: category.strCategoryThumb,
-    };
+  const categories = data.categories.map((category: { idCategory: string; strCategory: string; strCategoryDescription: string; strCategoryThumb: string }) => {
+    return new Category(category.idCategory, category.strCategory, category.strCategoryDescription, category.strCategoryThumb);
   });
-  console.log(categoryMaps);
-  return categoryMaps;
+  console.log(categories);
+  return categories;
 };
 
-const categoryMaps = ref<Category[]>([]);
-fetchCategoriesAsMap().then((data) => {
-  categoryMaps.value = data;
+const categories = ref<Category[]>([]);
+fetchCategories().then((data) => {
+  categories.value = data;
 });
 
-// let myCat1 = "";
-// fetchCategories().then((data) => {
-//   for (let i = 0; i < data.categories.length; i++) {
-//     myCat1 = data.categories[i].strCategory;
-//     console.log(myCat1);
-//   }
-// });
+const activeSelection = ref<string | null>(null);
 
-fetchCategories();
+const setActiveSelection = (name: string) => {
+  activeSelection.value = name;
+};
 </script>
 
 <style scoped></style>
