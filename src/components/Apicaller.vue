@@ -7,18 +7,31 @@
     </ion-header>
     <ion-content>
       <ion-list>
+        <!-- variant: with go button -->
         <ion-item v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
           <ion-label>{{ category.name }}</ion-label>
+          <ion-button slot="end"> Go </ion-button>
         </ion-item>
+
+        <!-- variant: with clickalbe item in list -->
+        <!-- <ion-item href="#" v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
+          <ion-label>{{ category.name }}</ion-label>
+        </ion-item>
+         -->
       </ion-list>
+
       <div v-if="activeSelection">Active selection: {{ activeSelection }}</div>
+
+      <!-- variant: go to list button -->
+      <!-- <ion-button router-link="/recipe-app/src/views/ListOfItems.vue">Go to list</ion-button> -->
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel } from "@ionic/vue";
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonIcon } from "@ionic/vue";
 import { Ref, ref, computed } from "vue";
+import { RouterLink, Router } from "vue-router";
 
 class Category {
   id: string;
@@ -55,8 +68,6 @@ const activeSelection = ref<string | null>(null);
 const setActiveSelection = (name: string) => {
   activeSelection.value = name;
 };
-
-//the next smallest thing I can do is onclick take me to the recipe list page with this param
 </script>
 
 <style scoped></style>
