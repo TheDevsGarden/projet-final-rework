@@ -9,7 +9,6 @@
       </ion-toolbar>
     </ion-header>
   </IonPage>
-  <div>test</div>
   <Apicaller></Apicaller>
 </template>
 

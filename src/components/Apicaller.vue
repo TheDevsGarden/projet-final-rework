@@ -2,22 +2,17 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
         <ion-title>API Caller</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <!-- variant: with go button -->
-        <ion-item v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
-          <ion-label>{{ category.name }}</ion-label>
-          <ion-button slot="end"> Go </ion-button>
-        </ion-item>
-
-        <!-- variant: with clickalbe item in list -->
-        <!-- <ion-item href="#" v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
+        <ion-item href="/pages/listOfItems" v-for="category in categories" :key="category.id" @click="setActiveSelection(category.name)">
           <ion-label>{{ category.name }}</ion-label>
         </ion-item>
-         -->
       </ion-list>
 
       <div v-if="activeSelection">Active selection: {{ activeSelection }}</div>
@@ -29,7 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonIcon } from "@ionic/vue";
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonIcon, IonButtons, IonMenuButton } from "@ionic/vue";
+import { Storage } from "@ionic/storage"; // I did a bun, yarn and npm install of ionic/storage idk why it's saying 'Cannot find module '@ionic/storage' or its corresponding type declarations.ts(2307)'
 import { Ref, ref, computed } from "vue";
 import { RouterLink, Router } from "vue-router";
 
@@ -65,9 +61,23 @@ fetchCategories().then((data) => {
 
 const activeSelection = ref<string | null>(null);
 
+const storage = new Storage();
+storage.create();
+
 const setActiveSelection = (name: string) => {
   activeSelection.value = name;
+  storage.set("selectedCategory", JSON.stringify(name)).then(() => {
+    storage.get("selectedCategory").then((data: string) => {
+      console.log("Storage contents:", data);
+    });
+  });
 };
+
+storage.get("selectedCategory").then((data: string) => {
+  if (data) {
+    activeSelection.value = JSON.parse(data);
+  }
+});
 </script>
 
 <style scoped></style>
