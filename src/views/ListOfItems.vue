@@ -48,8 +48,15 @@ class Meal {
 const fetchMeals = async () => {
   const theCatSelected = await storage.get("selectedCategory");
   console.log(theCatSelected);
-  //const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${theCatSelected}`);
-  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb`);
+  console.log(typeof theCatSelected); //stirng
+  var url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + theCatSelected;
+
+  var slicedUrl = url.slice(0, 53);
+  var slicedurl2 = url.slice(54, url.length - 1);
+  var slicedurl3 = slicedUrl + slicedurl2; //janky solution, string literal didn't work
+
+  const response = await fetch(slicedurl3);
+  //   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb`);
   const data = await response.json();
   console.log(data);
   const meals = data.meals.map((meal: { strMeal: string; strMealThumb: string; idMeal: string }) => {
