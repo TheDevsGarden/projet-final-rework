@@ -16,9 +16,6 @@
       </ion-list>
 
       <div v-if="activeSelection">Active selection: {{ activeSelection }}</div>
-
-      <!-- variant: go to list button -->
-      <!-- <ion-button router-link="/recipe-app/src/views/ListOfItems.vue">Go to list</ion-button> -->
     </ion-content>
   </ion-page>
 </template>
