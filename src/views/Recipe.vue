@@ -1,19 +1,25 @@
 <template>
-  <ion-page>
+  <ion-page v-for="mealDetail in myMeal" :key="mealDetail.idMeal">
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button color="secondary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ myMeal ? myMeal.strMeal : "Loading..." }}</ion-title>
+        <ion-title>{{ mealDetail ? mealDetail.strMeal : "Loading..." }}</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content> </ion-content>
+    <ion-content>
+      <ion-img :src="mealDetail.strMealThumb"> </ion-img>
+      <h1>Ingrédients</h1>
+      <ul>
+        <li>bread</li>
+      </ul>
+    </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonImg } from "@ionic/vue";
 
 import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
@@ -22,6 +28,7 @@ import { RouterLink, Router } from "vue-router";
 const storage = new Storage();
 storage.create();
 
+//the following needs refactoring but I got it to work so there's that...
 class MealDetail {
   idMeal: string;
   strMeal: string;
@@ -195,7 +202,7 @@ const fetchMealDetail = async () => {
   const theMealSelected = await storage.get("selectedMeal");
   console.log(theMealSelected);
   console.log(typeof theMealSelected);
-  var baseurl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772";
+  var baseurl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=53076";
   const response = await fetch(baseurl);
 
   const data = await response.json();
