@@ -5,6 +5,7 @@ import Apicaller from "@/components/Apicaller.vue";
 import CategoriesPage from "@/views/CategoriesPage.vue";
 import ListOfItems from "@/views/ListOfItems.vue";
 import Recipe from "@/views/Recipe.vue";
+import MealOfTheDay from "@/views/MealOfTheDay.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/pages/recipe",
     name: "recipe",
     component: Recipe,
+  },
+  {
+    path: "/pages/daily",
+    name: "daily",
+    component: MealOfTheDay,
   },
 ];
 

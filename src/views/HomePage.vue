@@ -114,9 +114,23 @@
 
 <script setup lang="ts">
 import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle } from "@ionic/vue";
-
+import { createStorage, fetchAndStoreRandomMeal, getMealOfTheDay } from "./MealOfTheDay.vue";
 import { readerOutline } from "ionicons/icons";
 import { register } from "swiper/element/bundle";
+import { Storage } from "@ionic/storage";
+import { ref } from "vue";
+
+const storage = ref<Storage | null>(null);
+
+const createStorage = async () => {
+  if (!storage.value) {
+    storage.value = new Storage();
+    await storage.value.create();
+  }
+};
+
+createStorage();
+
 register();
 
 const spaceBetween = 1;
