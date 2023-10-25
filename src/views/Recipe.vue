@@ -10,6 +10,8 @@
     </ion-header>
     <ion-content>
       <ion-img :src="mealDetail.strMealThumb"> </ion-img>
+      <h1>Instructions</h1>
+      <ion-text>{{ mealDetail.strInstructions }}</ion-text>
       <h1>Ingrédients</h1>
       <ion-list>
         <ion-item v-for="item in ingredients">
@@ -21,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonImg, IonList, IonItem, IonLabel } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonImg, IonList, IonItem, IonLabel, IonText } from "@ionic/vue";
 
 import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
@@ -202,14 +204,19 @@ const myMeal = ref<MealDetail[]>([]);
 
 const fetchMealDetail = async () => {
   const theMealSelected = await storage.get("selectedMeal");
-  console.log(theMealSelected);
-  console.log(typeof theMealSelected);
-  var baseurl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=53076";
-  const response = await fetch(baseurl);
+  var baseurl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + theMealSelected;
 
+  //handle url string
+  var slicedUrl = baseurl.slice(0, 53);
+  var slicedurl2 = baseurl.slice(54, baseurl.length - 1);
+  var slicedurl3 = slicedUrl + slicedurl2; //janky solution, string
+
+  //handle fetch req
+  const response = await fetch(slicedurl3);
   const data = await response.json();
   console.log(data);
 
+  //map data, inefficient/ no time to refactor
   const myMeal = data.meals.map(
     (mealDetail: {
       idMeal: string;
