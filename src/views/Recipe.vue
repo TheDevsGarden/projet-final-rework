@@ -11,9 +11,7 @@
     <ion-content>
       <ion-img :src="mealDetail.strMealThumb"> </ion-img>
       <h1>Ingrédients</h1>
-      <ul>
-        <li>bread</li>
-      </ul>
+      <ul id="myList"></ul>
     </ion-content>
   </ion-page>
 </template>
@@ -321,13 +319,26 @@ const fetchMealDetail = async () => {
       );
     }
   );
-  console.log(myMeal);
+
   return myMeal;
 };
 
 fetchMealDetail().then((data) => {
   myMeal.value = data;
+  getmyingredients(myMeal);
 });
+
+function getmyingredients(mapInput: Ref<MealDetail[]>) {
+  for (let mealDetail of mapInput.value) {
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = mealDetail[`strIngredient${i}`];
+      const measure = mealDetail[`strMeasure${i}`];
+      if (ingredient && measure) {
+        console.log(`${ingredient}: ${measure}`);
+      }
+    }
+  }
+}
 </script>
 
 <style scoped></style>
