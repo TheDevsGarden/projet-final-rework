@@ -10,7 +10,7 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-card v-for="meal in meals" :key="meal.idMeal">
+        <ion-card href="/pages/recipe" v-for="meal in meals" :key="meal.idMeal" @click="setMealSelection(meal.idMeal)">
           <img :src="meal.strMealThumb" />
           <ion-card-header>
             <ion-card-title>{{ meal.strMeal }}</ion-card-title>
@@ -53,7 +53,7 @@ const fetchMeals = async () => {
 
   var slicedUrl = url.slice(0, 53);
   var slicedurl2 = url.slice(54, url.length - 1);
-  var slicedurl3 = slicedUrl + slicedurl2; //janky solution, string literal didn't work
+  var slicedurl3 = slicedUrl + slicedurl2; //janky solution, string
 
   const response = await fetch(slicedurl3);
   //   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb`);
@@ -69,6 +69,24 @@ const fetchMeals = async () => {
 const meals = ref<Meal[]>([]);
 fetchMeals().then((data) => {
   meals.value = data;
+});
+
+//store the meal that the user clicks on
+const mealSelection = ref<string | null>(null);
+
+const setMealSelection = (name: string) => {
+  mealSelection.value = name;
+  storage.set("selectedMeal", JSON.stringify(name)).then(() => {
+    storage.get("selectedMeal").then((data: string) => {
+      console.log("Storage contents:", data);
+    });
+  });
+};
+
+storage.get("selectedMeal").then((data: string) => {
+  if (data) {
+    mealSelection.value = JSON.parse(data);
+  }
 });
 </script>
 

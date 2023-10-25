@@ -4,6 +4,7 @@ import HomePage from "../views/HomePage.vue";
 import Apicaller from "@/components/Apicaller.vue";
 import CategoriesPage from "@/views/CategoriesPage.vue";
 import ListOfItems from "@/views/ListOfItems.vue";
+import Recipe from "@/views/Recipe.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/pages/listOfItems",
     name: "listOfItems",
     component: ListOfItems,
+  },
+  {
+    path: "/pages/recipe",
+    name: "recipe",
+    component: Recipe,
   },
 ];
 
