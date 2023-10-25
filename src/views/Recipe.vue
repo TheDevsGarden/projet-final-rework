@@ -11,13 +11,17 @@
     <ion-content>
       <ion-img :src="mealDetail.strMealThumb"> </ion-img>
       <h1>Ingrédients</h1>
-      <ul id="myList"></ul>
+      <ion-list>
+        <ion-item v-for="item in ingredients">
+          <ion-label>{{ item }}</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonImg } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonImg, IonList, IonItem, IonLabel } from "@ionic/vue";
 
 import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
@@ -328,16 +332,22 @@ fetchMealDetail().then((data) => {
   getmyingredients(myMeal);
 });
 
-function getmyingredients(mapInput: Ref<MealDetail[]>) {
+var ingredients: string[] = []; //not efficient, only way I know how to push items to screen
+
+function getmyingredients(mapInput: Ref<MealDetail[]>): string[] {
+  ingredients = [];
   for (let mealDetail of mapInput.value) {
     for (let i = 1; i <= 20; i++) {
       const ingredient = mealDetail[`strIngredient${i}`];
       const measure = mealDetail[`strMeasure${i}`];
       if (ingredient && measure) {
-        console.log(`${ingredient}: ${measure}`);
+        const ingredientString = `${ingredient}: ${measure}`;
+        ingredients.push(ingredientString);
       }
     }
   }
+  console.log(ingredients);
+  return ingredients;
 }
 </script>
 
