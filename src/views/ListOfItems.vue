@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonIcon, IonButtons, IonMenuButton, IonCard, IonCardTitle, IonCardContent, IonCardHeader } from "@ionic/vue";
-import { Storage } from "@ionic/storage"; // I did a bun, yarn and npm install of ionic/storage idk why it's saying 'Cannot find module '@ionic/storage' or its corresponding type declarations.ts(2307)'
+import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
 import { RouterLink, Router } from "vue-router";
 
