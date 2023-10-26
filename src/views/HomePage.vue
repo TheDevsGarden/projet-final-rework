@@ -185,8 +185,9 @@
 
 <script setup lang="ts">
 import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonList, IonText } from "@ionic/vue";
+import { airplaneOutline, appsOutline, fastFoodOutline, fishOutline, iceCreamOutline, pawOutline, readerOutline } from "ionicons/icons";
+
 import { createStorage, fetchAndStoreRandomMeal, getMealOfTheDay } from "./MealOfTheDay.vue";
-import { readerOutline } from "ionicons/icons";
 import { register } from "swiper/element/bundle";
 import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
@@ -194,13 +195,6 @@ import { RouterLink, Router } from "vue-router";
 
 const storage = new Storage();
 storage.create();
-
-const createStorage = async () => {
-  if (!storage.value) {
-    storage.value = new Storage();
-    await storage.value.create();
-  }
-};
 
 createStorage();
 
