@@ -13,52 +13,64 @@
         <ion-row>
           <ion-col class="ion-text-center">
             <ion-button color="secondary">
-              <ion-icon :icon="readerOutline" size="large" color=""></ion-icon>
+              <ion-icon :icon="appsOutline" size="large" color=""></ion-icon>
             </ion-button>
-            <ion-label>ALL</ion-label>
+            <ion-label>All</ion-label>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-button color="primary">
-              <ion-icon :icon="readerOutline" size="large"></ion-icon>
+              <ion-icon :icon="pawOutline" size="large"></ion-icon>
             </ion-button>
-            <ion-label>ALL</ion-label>
+            <ion-label>Beef</ion-label>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-button>
-              <ion-icon :icon="readerOutline" size="large"></ion-icon>
+              <ion-icon :icon="fishOutline" size="large"></ion-icon>
             </ion-button>
-            <ion-label>ALL</ion-label>
+            <ion-label>Fish</ion-label>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-button>
-              <ion-icon :icon="readerOutline" size="large"></ion-icon>
+              <ion-icon :icon="iceCreamOutline" size="large"></ion-icon>
             </ion-button>
-            <ion-label>ALL</ion-label>
+            <ion-label>Dessert</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>
 
-      <ion-label class="ion-text-center"><h1>I WOULD LIKE TO COOK</h1></ion-label>
+      <ion-label class="ion-text-center" color="darl"><h1>I WOULD LIKE TO COOK</h1></ion-label>
+
       <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
 
-      <ion-card class="ion-text-center">
-        <ion-card-header>
-          <ion-card-title>UNLOCK UNLIMITED RECIPES</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content><ion-button color="dark">Go Premium</ion-button></ion-card-content>
-      </ion-card>
+      <ion-row id="premium-1">
+        <ion-col size="12">
+          <ion-text color="light">
+            <h4>OUVRIR</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12">
+          <ion-text color="light">
+            <h4>RECETTES ILLIMITÉES</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block" style="height: 50px" color="secondary">PASSER EN PREMIUM</ion-button>
+        </ion-col>
+      </ion-row>
 
       <!-- professor has a requirement for meal of the day -->
-      <ion-card class="ion-text-center">
-        <ion-card-header>
-          <ion-card-title>Recette DU JOUR</ion-card-title>
-        </ion-card-header>
+      <ion-row id="premium-2">
+        <ion-col size="12">
+          <ion-text color="dark">
+            <h4>RECETTE DU JOUR</h4>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button href="/pages/recipe" expand="block" style="height: 50px" color="secondary">Voir</ion-button>
+        </ion-col>
+      </ion-row>
 
-        <ion-card-content><ion-button href="/pages/recipe" color="dark">Voir</ion-button></ion-card-content>
-      </ion-card>
-
-      <ion-label><h2>I WOULD LIKE TO COOK</h2></ion-label>
+      <ion-label color="dark"><h3>POPULAR RECIPES THIS WEEK</h3></ion-label>
       <!-- The below could be re-implemented in vue-virtual-scroller  -->
       <ion-list>
         <swiper-container
@@ -168,12 +180,11 @@
         </swiper-container>
       </ion-list>
     </ion-content>
-    <ion-footer>Footer</ion-footer>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonList } from "@ionic/vue";
+import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonList, IonText } from "@ionic/vue";
 import { createStorage, fetchAndStoreRandomMeal, getMealOfTheDay } from "./MealOfTheDay.vue";
 import { readerOutline } from "ionicons/icons";
 import { register } from "swiper/element/bundle";
@@ -273,5 +284,33 @@ swiper-slide {
 
 ion-card-title {
   font-size: small;
+}
+ion-text {
+  font-size: 12px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+ion-searchbar {
+  margin: 20px 0;
+  padding: 10px 20px;
+}
+
+#premium-1 {
+  background-color: #242e54;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#premium-2 {
+  background-color: #d7d8da;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#premium ion-col {
+  padding: 0;
 }
 </style>
