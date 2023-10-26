@@ -77,14 +77,91 @@
           @progress="onProgress"
           @slidechange="onSlideChange"
         >
-          <swiper-slide>
-            <ion-card href="/pages/recipe" v-for="meal in meals" :key="meal.idMeal" @click="setMealSelection(meal.idMeal)">
-              <img :src="meal.strMealThumb" />
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[0].idMeal" @click="setMealSelection(meals[0].idMeal)">
+              <img :src="meals[0].strMealThumb" />
               <ion-card-header>
-                <ion-card-title>{{ meal.strMeal }}</ion-card-title>
+                <ion-card-title>{{ meals[0].strMeal }}</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <p>{{ meal.idMeal }}</p>
+                <p>{{ meals[0].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[1].idMeal" @click="setMealSelection(meals[1].idMeal)">
+              <img :src="meals[1].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[1].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[1].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[2].idMeal" @click="setMealSelection(meals[2].idMeal)">
+              <img :src="meals[2].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[2].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[2].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[3].idMeal" @click="setMealSelection(meals[3].idMeal)">
+              <img :src="meals[3].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[3].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[3].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[4].idMeal" @click="setMealSelection(meals[4].idMeal)">
+              <img :src="meals[4].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[4].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[4].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[5].idMeal" @click="setMealSelection(meals[5].idMeal)">
+              <img :src="meals[5].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[5].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[5].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[6].idMeal" @click="setMealSelection(meals[6].idMeal)">
+              <img :src="meals[6].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[6].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[6].idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide v-if="meals.length > 0">
+            <ion-card href="/pages/recipe" :key="meals[7].idMeal" @click="setMealSelection(meals[7].idMeal)">
+              <img :src="meals[7].strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meals[7].strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meals[7].idMeal }}</p>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
@@ -136,9 +213,24 @@ class Meal {
   }
 }
 
+const categories = ["Beef", "Chicken", "Dessert", "Lamb", "Miscellaneous", "Pasta", "Pork", "Seafood", "Side", "Starter", "Vegan", "Vegetarian", "Breakfast", "Goat"];
+
+const selectRandomCategory = (): string => {
+  const randomIndex = Math.floor(Math.random() * categories.length);
+  return categories[randomIndex];
+};
+
 const fetchMeals = async () => {
-  var url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken";
-  const response = await fetch(url);
+  var word = selectRandomCategory();
+
+  var url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + word;
+  var slicedUrl = url.slice(0, 53);
+  var slicedurl2 = url.slice(53, url.length);
+  var slicedurl3 = slicedUrl + slicedurl2;
+  console.log(slicedurl3);
+
+  const response = await fetch(slicedurl3);
+
   const data = await response.json();
   console.log(data);
   const meals = data.meals.map((meal: { strMeal: string; strMealThumb: string; idMeal: string }) => {
@@ -173,13 +265,13 @@ storage.get("selectedMeal").then((data: string) => {
 </script>
 
 <style scoped>
-.wider-slide > swiper-slide {
-  min-width: 50%;
-  /* min-height: 50%; */
-}
-.wider-slide > swiper-slide > ion-card > img {
-  width: 100%;
-  height: 50%;
+swiper-slide {
+  min-width: 70%;
+  max-height: 25rem;
   object-fit: contain;
+}
+
+ion-card-title {
+  font-size: small;
 }
 </style>
