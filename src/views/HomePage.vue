@@ -60,67 +60,52 @@
 
       <ion-label><h2>I WOULD LIKE TO COOK</h2></ion-label>
       <!-- The below could be re-implemented in vue-virtual-scroller  -->
-      <swiper-container
-        class="wider-slide"
-        :slides-per-view="3"
-        :space-between="spaceBetween"
-        :centered-slides="true"
-        :pagination="{
-          hideOnClick: true,
-        }"
-        :breakpoints="{
-          768: {
-            slidesPerView: 3,
-          },
-        }"
-        @progress="onProgress"
-        @slidechange="onSlideChange"
-      >
-        <swiper-slide>
-          <ion-card color="secondary">
-            <img alt="soup" src="https://shorturl.at/hFIM5" />
-            <ion-card-header>
-              <ion-card-title>Soup</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content> Card Content </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card color="secondary">
-            <img alt="soup" src="https://shorturl.at/hFIM5" />
-            <ion-card-header>
-              <ion-card-title>Soup</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content> Card Content </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-card color="secondary">
-            <img alt="soup" src="https://shorturl.at/hFIM5" />
-            <ion-card-header>
-              <ion-card-title>Soup</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content> Card Content </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-      </swiper-container>
+      <ion-list>
+        <swiper-container
+          class="wider-slide"
+          :slides-per-view="3"
+          :space-between="spaceBetween"
+          :centered-slides="true"
+          :pagination="{
+            hideOnClick: true,
+          }"
+          :breakpoints="{
+            768: {
+              slidesPerView: 3,
+            },
+          }"
+          @progress="onProgress"
+          @slidechange="onSlideChange"
+        >
+          <swiper-slide>
+            <ion-card href="/pages/recipe" v-for="meal in meals" :key="meal.idMeal" @click="setMealSelection(meal.idMeal)">
+              <img :src="meal.strMealThumb" />
+              <ion-card-header>
+                <ion-card-title>{{ meal.strMeal }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>{{ meal.idMeal }}</p>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+        </swiper-container>
+      </ion-list>
     </ion-content>
     <ion-footer>Footer</ion-footer>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle } from "@ionic/vue";
+import { IonContent, IonLabel, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonCol, IonSearchbar, IonButton, IonIcon, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonCardHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonList } from "@ionic/vue";
 import { createStorage, fetchAndStoreRandomMeal, getMealOfTheDay } from "./MealOfTheDay.vue";
 import { readerOutline } from "ionicons/icons";
 import { register } from "swiper/element/bundle";
 import { Storage } from "@ionic/storage";
-import { ref } from "vue";
+import { Ref, ref, computed } from "vue";
+import { RouterLink, Router } from "vue-router";
 
-const storage = ref<Storage | null>(null);
+const storage = new Storage();
+storage.create();
 
 const createStorage = async () => {
   if (!storage.value) {
@@ -138,6 +123,53 @@ const onProgress = (e) => {
   const [swiper, progress] = e.detail;
   console.log(progress);
 };
+
+class Meal {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+
+  constructor(strMeal: string, strMealThumb: string, idMeal: string) {
+    this.strMeal = strMeal;
+    this.strMealThumb = strMealThumb;
+    this.idMeal = idMeal;
+  }
+}
+
+const fetchMeals = async () => {
+  var url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken";
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+  const meals = data.meals.map((meal: { strMeal: string; strMealThumb: string; idMeal: string }) => {
+    return new Meal(meal.strMeal, meal.strMealThumb, meal.idMeal);
+  });
+  console.log(meals);
+  return meals;
+};
+
+const meals = ref<Meal[]>([]);
+fetchMeals().then((data) => {
+  meals.value = data;
+});
+
+//store the meal that the user clicks on
+const mealSelection = ref<string | null>(null);
+
+const setMealSelection = (name: string) => {
+  mealSelection.value = name;
+  storage.set("selectedMeal", JSON.stringify(name)).then(() => {
+    storage.get("selectedMeal").then((data: string) => {
+      console.log("Storage contents:", data);
+    });
+  });
+};
+
+storage.get("selectedMeal").then((data: string) => {
+  if (data) {
+    mealSelection.value = JSON.parse(data);
+  }
+});
 </script>
 
 <style scoped>
