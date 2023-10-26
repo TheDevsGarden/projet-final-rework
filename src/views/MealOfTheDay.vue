@@ -44,6 +44,7 @@ const getMealOfTheDay = async () => {
   await storage.set("selectedMeal", JSON.stringify(data));
   if (data) {
     var stringData = JSON.stringify(data).slice(3, 8);
+    await storage.set("selectedMeal", data);
     // console.log("Retrieved meal from storage:", data);
     console.log("Retrieved meal from storage:", stringData);
     return stringData;

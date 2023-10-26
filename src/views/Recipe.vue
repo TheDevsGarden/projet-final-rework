@@ -28,6 +28,7 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, Io
 import { Storage } from "@ionic/storage";
 import { Ref, ref, computed } from "vue";
 import { RouterLink, Router } from "vue-router";
+import { getMealOfTheDay } from "./MealOfTheDay.vue";
 
 const storage = new Storage();
 storage.create();
