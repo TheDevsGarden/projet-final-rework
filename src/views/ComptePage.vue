@@ -37,7 +37,8 @@ import { useRouter } from "vue-router";
 // Simulated user email
 const userEmail = ref("example@example.com");
 
-// Using Vue Router
+// Using Vue Router.
+//
 const router = useRouter();
 
 // Navigate to a specific page
