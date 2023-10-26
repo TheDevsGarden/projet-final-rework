@@ -11,6 +11,7 @@ import LandingPage from "@/views/LandingPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import CollectionPage from "@/views/CollectionPage.vue";
+import ComptePage from "@/views/ComptePage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -38,11 +39,6 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage,
   },
   {
-    path: "/collection",
-    name: "collection",
-    component: CollectionPage,
-  },
-  {
     path: "/apicaller",
     name: "categoryPage",
     component: Apicaller,
@@ -66,6 +62,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/pages/daily",
     name: "daily",
     component: MealOfTheDay,
+  },
+  {
+    path: "/pages/account",
+    name: "account",
+    component: ComptePage,
   },
 ];
 

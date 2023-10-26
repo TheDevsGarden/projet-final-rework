@@ -15,7 +15,7 @@
             <ion-button color="secondary">
               <ion-icon :icon="appsOutline" size="large" color=""></ion-icon>
             </ion-button>
-            <ion-label>All</ion-label>
+            <ion-label>All Items</ion-label>
           </ion-col>
           <ion-col class="ion-text-center">
             <ion-button color="primary">
