@@ -7,15 +7,40 @@ import ListOfItems from "@/views/ListOfItems.vue";
 import Recipe from "@/views/Recipe.vue";
 import MealOfTheDay from "@/views/MealOfTheDay.vue";
 
+import LandingPage from "@/views/LandingPage.vue";
+import LoginPage from "@/views/LoginPage.vue";
+import RegisterPage from "@/views/RegisterPage.vue";
+import CollectionPage from "@/views/CollectionPage.vue";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/landing",
+  },
+  {
+    path: "/landing",
+    name: "landing",
+    component: LandingPage,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginPage,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: RegisterPage,
   },
   {
     path: "/home",
     name: "home",
     component: HomePage,
+  },
+  {
+    path: "/collection",
+    name: "collection",
+    component: CollectionPage,
   },
   {
     path: "/apicaller",
