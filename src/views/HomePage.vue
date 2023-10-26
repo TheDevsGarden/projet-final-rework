@@ -55,7 +55,7 @@
           <ion-card-title>Recette DU JOUR</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content><ion-button color="dark">Voir</ion-button></ion-card-content>
+        <ion-card-content><ion-button href="/pages/recipe" color="dark">Voir</ion-button></ion-card-content>
       </ion-card>
 
       <ion-label><h2>I WOULD LIKE TO COOK</h2></ion-label>

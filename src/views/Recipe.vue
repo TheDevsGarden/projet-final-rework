@@ -204,6 +204,7 @@ const myMeal = ref<MealDetail[]>([]);
 
 const fetchMealDetail = async () => {
   const theMealSelected = await storage.get("selectedMeal");
+  console.log(theMealSelected);
   var baseurl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + theMealSelected;
 
   //handle url string

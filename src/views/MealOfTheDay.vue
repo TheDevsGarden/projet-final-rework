@@ -41,9 +41,12 @@ const getMealOfTheDay = async () => {
     createStorage();
   }
   const data = await storage.get("selectedRandomMeal");
+  await storage.set("selectedMeal", JSON.stringify(data));
   if (data) {
-    console.log("Retrieved meal from storage:", data);
-    return data;
+    var stringData = JSON.stringify(data).slice(3, 8);
+    // console.log("Retrieved meal from storage:", data);
+    console.log("Retrieved meal from storage:", stringData);
+    return stringData;
   } else {
     await fetchAndStoreRandomMeal();
     return getMealOfTheDay();
