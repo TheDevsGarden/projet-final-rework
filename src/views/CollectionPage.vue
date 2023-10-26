@@ -8,18 +8,10 @@
         <ion-title>My Collection</ion-title>
       </ion-toolbar>
     </ion-header>
-      <ion-content>
-        
-      </ion-content>
-    </ion-page>
-  </template>
-  
-  <script setup lang="ts">
-    import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue";
-    import { Storage } from "@ionic/storage";
-    import { ref } from "vue";
-  
-    const storage = new Storage();
-    storage.create();
-  </script>
-  
+    <ion-content> </ion-content>
+  </ion-page>
+</template>
+
+<script setup lang="ts">
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue";
+</script>

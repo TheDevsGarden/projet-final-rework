@@ -64,6 +64,11 @@ const routes: Array<RouteRecordRaw> = [
     component: MealOfTheDay,
   },
   {
+    path: "/pages/collection",
+    name: "collection",
+    component: CollectionPage,
+  },
+  {
     path: "/pages/account",
     name: "account",
     component: ComptePage,
