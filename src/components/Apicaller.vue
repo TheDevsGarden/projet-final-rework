@@ -15,7 +15,7 @@
         </ion-item>
       </ion-list>
 
-      <div v-if="activeSelection">Active selection: {{ activeSelection }}</div>
+      <div v-if="activeSelection">choix sauvegardé: {{ activeSelection }}</div>
     </ion-content>
   </ion-page>
 </template>

@@ -41,7 +41,7 @@ const appPages = [
   },
   {
     title: "COLLECTION",
-    url: "/pages/categories",
+    url: "/pages/collection",
     iosIcon: heartOutline,
     mdIcon: heartSharp,
   },
