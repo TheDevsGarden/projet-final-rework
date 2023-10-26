@@ -1,5 +1,5 @@
 <template>
-  <ion-page>
+  <ion-page v-if="!isLoading">
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-buttons slot="start">
@@ -181,6 +181,9 @@
       </ion-list>
     </ion-content>
   </ion-page>
+  <div v-else>
+    <p>loading...</p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -190,7 +193,7 @@ import { airplaneOutline, appsOutline, fastFoodOutline, fishOutline, iceCreamOut
 import { createStorage, fetchAndStoreRandomMeal, getMealOfTheDay } from "./MealOfTheDay.vue";
 import { register } from "swiper/element/bundle";
 import { Storage } from "@ionic/storage";
-import { Ref, ref, computed } from "vue";
+import { Ref, ref, computed, onMounted } from "vue";
 import { RouterLink, Router } from "vue-router";
 
 const storage = new Storage();
@@ -246,9 +249,9 @@ const fetchMeals = async () => {
 };
 
 const meals = ref<Meal[]>([]);
-fetchMeals().then((data) => {
-  meals.value = data;
-});
+// fetchMeals().then((data) => {
+//   meals.value = data;
+// });
 
 //store the meal that the user clicks on
 const mealSelection = ref<string | null>(null);
@@ -262,10 +265,25 @@ const setMealSelection = (name: string) => {
   });
 };
 
-storage.get("selectedMeal").then((data: string) => {
-  if (data) {
-    mealSelection.value = JSON.parse(data);
-  }
+// storage.get("selectedMeal").then((data: string) => {
+//   if (data) {
+//     mealSelection.value = JSON.parse(data);
+//   }
+// });
+
+const isLoading = ref(true);
+
+onMounted(async () => {
+  // Perform all asynchronous operations here
+  await fetchMeals().then((data) => {
+    meals.value = data;
+  });
+  storage.get("selectedMeal").then((data: string) => {
+    if (data) {
+      mealSelection.value = JSON.parse(data);
+    }
+  });
+  isLoading.value = false;
 });
 </script>
 
