@@ -21,7 +21,7 @@
         <p>Catégorie: {{ recette.strCategory }}</p>
         <h2>Ingrédients</h2>
         <ul>
-          <DynamicScroller class="scroller" :items="ingredients" :min-item-size="0">
+          <DynamicScroller class="scroller" :items="ingredients" :min-item-size="1">
             <template #default="{ item }">
               <li>{{ item }}</li>
             </template>

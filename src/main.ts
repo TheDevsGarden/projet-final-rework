@@ -20,8 +20,8 @@ import "@ionic/vue/css/text-transformation.css";
 import "@ionic/vue/css/flex-utils.css";
 import "@ionic/vue/css/display.css";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
-import VueVirtualScroller from "vue3-virtual-scroller";
-import { DynamicScroller } from "vue3-virtual-scroller";
+import VueVirtualScroller from "vue-virtual-scroller";
+import { DynamicScroller } from "vue-virtual-scroller";
 /* Theme variables */
 import "./theme/variables.css";
 
