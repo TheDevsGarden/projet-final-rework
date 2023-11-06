@@ -23,33 +23,33 @@
 <script setup lang="ts">
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet, IonSplitPane } from "@ionic/vue";
 import { ref } from "vue";
-import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, fingerPrintOutline, heartOutline, heartSharp, home, listCircleOutline, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from "ionicons/icons";
+import { fishOutline, fishSharp } from "ionicons/icons";
 
 const selectedIndex = ref(0);
 const appPages = [
   {
     title: "ACCUEIL",
-    url: "/home",
-    iosIcon: home,
-    mdIcon: home,
+    url: "/folder/Accueil",
+    iosIcon: fishOutline,
+    mdIcon: fishSharp,
   },
   {
-    title: "CATÉGORIES",
-    url: "/pages/categories",
-    iosIcon: listCircleOutline,
-    mdIcon: listCircleOutline,
+    title: "Chicken",
+    url: "/liste/Chicken",
+    iosIcon: fishOutline,
+    mdIcon: fishSharp,
   },
   {
-    title: "COLLECTION",
-    url: "/pages/collection",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
+    title: "Seafood",
+    url: "/liste/Seafood",
+    iosIcon: fishOutline,
+    mdIcon: fishSharp,
   },
   {
-    title: "COMPTE",
-    url: "/pages/account",
-    iosIcon: fingerPrintOutline,
-    mdIcon: fingerPrintOutline,
+    title: "Dessert",
+    url: "/liste/Dessert",
+    iosIcon: fishOutline,
+    mdIcon: fishSharp,
   },
 ];
 
