@@ -20,18 +20,8 @@ const routes: Array<RouteRecordRaw> = [
     component: Detail,
   },
   {
-    name: "Chicken",
-    path: "/liste/Chicken",
-    component: Liste,
-  },
-  {
-    name: "Seafood",
-    path: "/liste/Seafood",
-    component: Liste,
-  },
-  {
-    name: "Dessert",
-    path: "/liste/Dessert",
+    name: "Liste",
+    path: "/liste/:id",
     component: Liste,
   },
 ];

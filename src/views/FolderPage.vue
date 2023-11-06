@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
+          <ion-menu-button color="secondary"></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -35,13 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { IonButtons, IonContent, IonHeader, IonImg, IonMenuButton, IonPage, IonTitle, IonToolbar } from "@ionic/vue";
+import { ref } from "vue";
+import { IonButtons, IonContent, IonHeader, IonImg, IonMenuButton, IonPage, IonTitle, IonToolbar, onIonViewWillEnter } from "@ionic/vue";
 
 const recette = ref({});
 const ingredients = ref([{}]);
 
-onMounted(async () => {
+onIonViewWillEnter(async () => {
   console.log("la page Home entrée");
   await getUneRecette();
 });
