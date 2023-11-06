@@ -9,7 +9,7 @@
     </ion-header>
     <ion-content>
       <ion-list v-for="meal in repas">
-        <ion-item :key="meal.idMeal">
+        <ion-item :key="meal.idMeal" @click="goToDetail(meal.idMeal)">
           <div class="mealIcon"><ion-img :key="meal.strMealThumb" :src="meal.strMealThumb"></ion-img></div>
           {{ meal.strMeal }}
         </ion-item>
@@ -21,10 +21,11 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonContent, IonList, IonItem, onIonViewWillEnter, IonImg } from "@ionic/vue";
 import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const repas = ref<Meal[]>([]);
 const route = useRoute();
+const router = useRouter();
 
 interface Meal {
   strMeal: string;
@@ -36,6 +37,10 @@ onIonViewWillEnter(async () => {
   const category = route.params.id;
   getListe(category);
 });
+
+const goToDetail = (id: string) => {
+  router.push(`/Detail/${id}`);
+};
 
 async function getListe(category) {
   let url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category;

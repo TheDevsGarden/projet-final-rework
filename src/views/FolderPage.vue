@@ -5,14 +5,11 @@
         <ion-buttons slot="start">
           <ion-menu-button color="secondary"></ion-menu-button>
         </ion-buttons>
+        <ion-title>Recette du moment</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large"> Recette du moment </ion-title>
-        </ion-toolbar>
-      </ion-header>
+      <ion-header collapse="condense"> </ion-header>
 
       <div id="container">
         <ion-img :src="recette.strMealThumb"></ion-img>
@@ -55,12 +52,23 @@ async function getUneRecette() {
   let temp: string[] = [];
   for (let i = 1; i <= 20; i++) {
     if (data.meals[0]["strIngredient" + i]) {
-      temp.push(data.meals[0]["strIngredient" + i]);
-      console.log(data.meals[0]["strIngredient" + i]);
+      let ingredient = data.meals[0]["strIngredient" + i];
+      let quantity = data.meals[0]["strMeasure" + i];
+      temp.push(`${quantity} ${ingredient}`);
     }
   }
   ingredients.value = temp;
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+p,
+li {
+  font-size: smaller;
+  color: darkslategrey;
+}
+
+.bullet {
+  list-style-type: disc !important;
+}
+</style>
