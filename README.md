@@ -1,3 +1,1 @@
-# RECIPE APP
 
-## Minimal version
