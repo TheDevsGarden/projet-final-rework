@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="secondary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>Recette du moment</ion-title>
+        <ion-title>Recette</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -20,7 +20,7 @@
         <ul>
           <DynamicScroller class="scroller" :items="ingredients" :min-item-size="1">
             <template #default="{ item }">
-              <li>{{ item }}</li>
+              <li class="bullet">{{ item }}</li>
             </template>
           </DynamicScroller>
         </ul>
@@ -34,17 +34,24 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { IonButtons, IonContent, IonHeader, IonImg, IonMenuButton, IonPage, IonTitle, IonToolbar, onIonViewWillEnter } from "@ionic/vue";
+import { useRoute } from "vue-router";
 
 const recette = ref({});
 const ingredients = ref([{}]);
+const route = useRoute();
 
 onIonViewWillEnter(async () => {
-  console.log("la page Home entrée");
-  await getUneRecette();
+  const meal = route.params.id;
+  getLaRecette(meal);
 });
 
-async function getUneRecette() {
-  let url = "https://www.themealdb.com/api/json/v1/1/random.php";
+async function getLaRecette(meal) {
+  let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + meal;
+  var slicedUrl = url.slice(0, 53);
+  var slicedurl2 = url.slice(53, url.length);
+  var slicedurl3 = slicedUrl + slicedurl2;
+  console.log(slicedurl3);
+
   const response = await fetch(url);
   const data = await response.json();
   console.log(data.meals[0].strMealThumb);
